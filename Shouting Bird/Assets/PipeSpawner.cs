@@ -12,7 +12,7 @@ public class PipeSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawnPipe();  
+        firstSpawnPipe();  
     }
 
     // Update is called once per frame
@@ -36,5 +36,11 @@ public class PipeSpawner : MonoBehaviour
         float highestPoint = transform.position.y + heightOffset;
         float spawnX = Camera.main.ViewportToWorldPoint(new Vector3(1.1f, 0.5f, 10)).x;
         Instantiate(pipe, new Vector3(spawnX, Random.Range(lowestPoint, highestPoint), 0), transform.rotation);
+    }
+    private void firstSpawnPipe()
+    {
+        float lowestPoint = transform.position.y - heightOffset;
+        float highestPoint = transform.position.y + heightOffset;
+        Instantiate(pipe, new Vector3(transform.position.x, Random.Range(lowestPoint, highestPoint), 0), transform.rotation);
     }
 }
