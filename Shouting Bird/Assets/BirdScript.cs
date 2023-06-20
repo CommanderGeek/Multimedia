@@ -29,5 +29,6 @@ public class BirdScript : MonoBehaviour
         birdIsAlive = false;
     }
 
+
     
 }
