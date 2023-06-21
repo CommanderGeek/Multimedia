@@ -9,6 +9,14 @@ public class BirdScript : MonoBehaviour
     public LogicScript logic;
     public bool birdIsAlive = true;
 
+    //audio input
+    public AudioSource source;
+    public Vector2 minSpeed = new Vector2(0,0);
+    public Vector2 maxSpeed;
+    public AudioLoudnessDetection detector;
+
+    public float sensibility = 100;
+    public float threshhold = 0.1f;
 
     // Start is called before the first frame update
     void Start()
@@ -19,8 +27,11 @@ public class BirdScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Space)==true && birdIsAlive) { 
-            myRigidbody.velocity = Vector2.up * flapStrength;
+
+        float loudness = detector.GetLoudnessFromMicrophone() * sensibility;
+
+        if (loudness>threshhold && birdIsAlive) { 
+            myRigidbody.velocity = Vector2.Lerp(minSpeed, maxSpeed, loudness);
         }
     }
 
