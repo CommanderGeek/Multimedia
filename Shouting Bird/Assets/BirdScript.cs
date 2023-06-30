@@ -11,35 +11,39 @@ public class BirdScript : MonoBehaviour
 
     //audio input
     public AudioSource source;
-    public Vector2 minSpeed = new Vector2(0,0);
+    public Vector2 minSpeed = new Vector2(0, 0);
     public Vector2 maxSpeed;
     public AudioLoudnessDetection detector;
 
     public float sensibility = 100;
     public float threshhold = 0.1f;
 
+    // Reference to the TailManager script
+    public TailManager tailManager;
+
     // Start is called before the first frame update
     void Start()
     {
-        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>(); 
+        logic = GameObject.FindGameObjectWithTag("Logic").GetComponent<LogicScript>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
         float loudness = detector.GetLoudnessFromMicrophone() * sensibility;
 
-        if (loudness>threshhold && birdIsAlive) { 
+        if (loudness > threshhold && birdIsAlive)
+        {
             myRigidbody.velocity = Vector2.Lerp(minSpeed, maxSpeed, loudness);
         }
     }
 
-    public void OnCollisionEnter2D(Collision2D collision){
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
         logic.gameOver();
         birdIsAlive = false;
+
+        // Destroy tail particles when the bird collides
+        tailManager.DestroyTailParticles();
     }
-
-
-    
 }
