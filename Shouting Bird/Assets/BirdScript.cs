@@ -8,6 +8,7 @@ public class BirdScript : MonoBehaviour
     public float flapStrength;
     public LogicScript logic;
     public bool birdIsAlive = true;
+    public ParticleSystem ps; 
 
     //audio input
     public AudioSource source;
@@ -38,6 +39,7 @@ public class BirdScript : MonoBehaviour
     public void OnCollisionEnter2D(Collision2D collision){
         logic.gameOver();
         birdIsAlive = false;
+        ps.Play();
     }
 
 
