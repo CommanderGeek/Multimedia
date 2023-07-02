@@ -19,8 +19,6 @@ public class BirdScript : MonoBehaviour
     public float sensibility = 100;
     public float threshhold = 0.1f;
 
-    // Reference to the TailManager script
-    public TailManager tailManager;
 
     // Start is called before the first frame update
     void Start()
@@ -45,8 +43,5 @@ public class BirdScript : MonoBehaviour
         birdIsAlive = false;
         ps.Play();
 
-
-        // Destroy tail particles when the bird collides
-        tailManager.DestroyTailParticles();
     }
 }
