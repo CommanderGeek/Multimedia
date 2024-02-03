@@ -1,2 +1,2 @@
 # Multimedia
-Multimedia Project
+Project for university course "Multimedia"
